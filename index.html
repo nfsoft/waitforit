@@ -1,5 +1,22 @@
 <html>
   <body>
     <h1>Wait for it</h1>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      setTimeout(function() {
+        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var data = imageData.data;
+        
+        for (var i = 0; i < data.length; i += 4) {
+          data[i]     = Math.round(Math.random() * 255);
+          data[i + 1] = Math.round(Math.random() * 255);
+          data[i + 2] = Math.round(Math.random() * 255);
+        }
+        ctx.putImageData(imageData, 0, 0);
+        
+      }, 1000);
+    </script>
   </body>
 </html>
